@@ -1,15 +1,28 @@
-function t = exercicio1(func,x0)
+function t = exercicio1(v, xl, xu)
 
-% nao alterar: inicio
-es = 1;
-imax = 20;
-% nao alterar: fim
+  es = 1;  
+  imax = 20;  
+  
+  t = 0; 
+  ea = 100; 
+  iter = 0; 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+  while (ea > es) && (iter < imax) 
+    iter = iter + 1; 
+    t_old = t; 
+    t = (xu*(v(xu)*(xl-xu))/(v(xl)-v(xu)));
+    
 
-% digite seu codigo aqui
-t = 0; % alterar
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+    if v(xl)*v(t) < 0 
+      xu = t;
+    elseif v(xu)*v(t) < 0
+      xl = t;
+    else
+      break; 
+    end
+    if t ~= 0 
+      ea = abs((t - t_old)/t) * 100;   
+    end
+  end
 
 endfunction
