@@ -1,6 +1,6 @@
 function t = exercicio1(v, xl, xu)
 
-  es = 1;  
+  es = 0.01;  
   imax = 20;  
   
   t = 0; 
