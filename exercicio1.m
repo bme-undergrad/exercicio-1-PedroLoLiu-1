@@ -1,28 +1,20 @@
-function t = exercicio1(v, xl, xu)
+function t = exercicio1(func, func_d, x0)
 
-  es = 0.01;  
-  imax = 20;  
-  
-  t = 0; 
-  ea = 100; 
-  iter = 0; 
+es = 0.01;  
+imax = 20;  
 
-  while (ea > es) && (iter < imax) 
-    iter = iter + 1; 
-    t_old = t; 
-    t = (xu*(v(xu)*(xl-xu))/(v(xl)-v(xu)));
-    
+t_roots = zeros(imax, 1);
+t_roots(1) = x0;
 
-    if v(xl)*v(t) < 0 
-      xu = t;
-    elseif v(xu)*v(t) < 0
-      xl = t;
-    else
-      break; 
-    end
-    if t ~= 0 
-      ea = abs((t - t_old)/t) * 100;   
-    end
-  end
-
+for ii = 1:lenght(t_roots)-1
+  if ii ~= 1
+    erro(ii) = abs((t_roots(ii)-t_roots(ii-1))/t_roots(ii))
+    if erro(ii) < es
+      break
+    endif
+  endif
+    t_roots(ii+1) = t_roots(ii) - func(t_roots(ii))/func_d(t_roots(ii));
+endfor
+t = t_roots(ii);
+ 
 endfunction
